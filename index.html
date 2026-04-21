@@ -3,182 +3,277 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>SewaAstra | Original Green Double-ID</title>
+    <title>SewaAstra | Ultra Premium ID Card</title>
     
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@800&family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@900&family=Poppins:wght@400;600;700&family=Dancing+Script&display=swap" rel="stylesheet">
 
     <style>
         :root {
-            --halka-green: #e9f5ea;
-            --dark-green: #2e7d32;
-            --pink-accent: #ff357a;
-            --navy-blue: #1a237e; /* काले रंग की जगह */
-            --border-green: #a5d6a7;
+            --primary-bold: #FF357A;
+            --secondary-dark: #1A237E;
+            --card-green-bg: #F0F7F1; /* Slightly softer green */
+            --card-border: #A5D6A7;
+            --white: #FFFFFF;
+            --gold: #D4AF37;
         }
 
         * { box-sizing: border-box; }
-        body { background: #f0f2f5; color: var(--navy-blue); font-family: 'Poppins', sans-serif; display: flex; flex-direction: column; align-items: center; padding: 15px; margin: 0; }
+        body { background: #e0e5ec; font-family: 'Poppins', sans-serif; display: flex; flex-direction: column; align-items: center; padding: 20px; margin: 0; }
 
-        /* Input Area */
-        .ui-panel { background: white; padding: 15px; border-radius: 15px; width: 100%; max-width: 350px; margin-bottom: 20px; box-shadow: 0 5px 15px rgba(0,0,0,0.05); }
-        .ui-panel input { width: 100%; padding: 10px; margin-bottom: 10px; border: 1px solid #ddd; border-radius: 8px; outline: none; }
+        /* Panel */
+        .panel { background: var(--white); padding: 20px; border-radius: 15px; width: 100%; max-width: 420px; margin-bottom: 25px; box-shadow: 10px 10px 20px #bebebe; }
+        .input-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+        .panel input { width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 8px; font-size: 13px; }
+        .panel input[type="file"] { grid-column: span 2; }
 
-        .id-container { display: flex; flex-direction: column; gap: 25px; align-items: center; }
-
-        /* Card Style */
-        .card {
-            width: 320px; height: 500px; background: var(--halka-green); border-radius: 25px; 
-            position: relative; overflow: hidden; border: 2px solid var(--border-green);
-            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+        /* Card Setup */
+        #card-container { display: flex; flex-direction: column; gap: 30px; }
+        .id-card {
+            width: 350px; height: 580px; border-radius: 25px; position: relative; overflow: hidden;
+            background: var(--card-green-bg); border: 2.5px solid var(--card-border);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
         }
 
-        /* Header Gradient */
-        .header {
-            background: linear-gradient(135deg, var(--pink-accent), #ff1744, #ffd600);
-            height: 130px; clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
-            display: flex; flex-direction: column; align-items: center; justify-content: center; color: white;
+        /* --- ULTRA PREMIUM WATERMARK LAYER --- */
+        .premium-watermark {
+            position: absolute; width: 200%; height: 200%; top: -50%; left: -50%;
+            background-image: linear-gradient(30deg, transparent 45%, rgba(26, 35, 126, 0.03) 50%, transparent 55%);
+            background-size: 30px 30px;
+            transform: rotate(15deg);
+            pointer-events: none; z-index: 1;
         }
-        .header h2 { font-family: 'Montserrat'; font-size: 18px; margin: 0; letter-spacing: 2px; }
 
-        /* Original Seel Style */
-        .seel {
-            position: absolute; width: 90px; height: 90px; border: 2px dashed var(--dark-green);
-            border-radius: 50%; display: flex; flex-direction: column; align-items: center;
-            justify-content: center; background: rgba(255,255,255,0.4); transform: rotate(-15deg);
-            z-index: 10; pointer-events: none;
+        .text-watermark {
+            position: absolute; width: 100%; height: 100%; top: 0; left: 0;
+            display: flex; flex-wrap: wrap; justify-content: space-around; align-content: space-around;
+            opacity: 0.04; transform: rotate(-30deg) scale(1.2); pointer-events: none; z-index: 1;
+            font-family: 'Montserrat'; font-weight: 900; font-size: 18px; color: var(--secondary-dark);
+            letter-spacing: 5px;
         }
-        .seel i { font-size: 20px; color: var(--dark-green); }
-        .seel span { font-size: 7px; font-weight: 800; color: var(--dark-green); text-align: center; line-height: 1; }
 
-        /* Front Specific */
-        .pfp-wrap {
-            width: 120px; height: 120px; border-radius: 50%; margin: -60px auto 0;
-            background: white; border: 4px solid var(--border-green); overflow: hidden;
-            position: relative; z-index: 5;
+        /* --- FRONT --- */
+        .f-header {
+            background: var(--secondary-dark); height: 140px; display: flex; align-items: center; 
+            justify-content: center; gap: 12px; clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
+            position: relative; z-index: 2;
         }
-        #p-out { width: 100%; height: 100%; object-fit: cover; }
+        .f-logo-inline { width: 50px; height: 50px; background: white; border-radius: 10px; padding: 4px; border: 2px solid var(--gold); }
+        .f-logo-inline img { width: 100%; height: 100%; object-fit: contain; }
+        .f-brand { font-family: 'Montserrat'; font-weight: 900; font-size: 32px; color: var(--white); }
 
-        .body-content { padding: 15px; text-align: center; }
-        .name { font-size: 19px; font-weight: 800; color: var(--navy-blue); margin: 10px 0; }
-        .badge { background: var(--dark-green); color: white; font-size: 10px; padding: 3px 12px; border-radius: 50px; font-weight: 600; }
-
-        .info-grid { 
-            margin-top: 15px; background: rgba(255,255,255,0.5); padding: 12px; 
-            border-radius: 15px; display: grid; grid-template-columns: 1fr 1fr; gap: 10px; text-align: left;
+        .f-pfp {
+            width: 135px; height: 135px; border-radius: 50%; border: 6px solid var(--white);
+            margin: -55px auto 0; position: relative; z-index: 5; overflow: hidden;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.15);
         }
-        .label { font-size: 8px; color: #666; text-transform: uppercase; }
-        .val { font-size: 12px; font-weight: 700; color: var(--navy-blue); }
+        .f-pfp img { width: 100%; height: 100%; object-fit: cover; }
 
-        /* Back Specific */
-        .b-header { padding: 15px; text-align: center; border-bottom: 2px solid var(--border-green); font-weight: 800; color: var(--dark-green); }
-        .b-body { padding: 20px; font-size: 11px; line-height: 1.5; }
-        .qr-wrap { display: flex; flex-direction: column; align-items: center; margin-top: 10px; }
-        #qr-box { background: white; padding: 8px; border-radius: 10px; border: 1px solid var(--border-green); }
+        .f-body { padding: 15px 20px; text-align: center; position: relative; z-index: 3; }
+        .f-name { font-size: 24px; font-weight: 800; color: var(--secondary-dark); text-transform: uppercase; margin-bottom: 2px; }
+        .f-tag { font-size: 11px; color: var(--primary-bold); font-weight: 700; letter-spacing: 3px; margin-bottom: 12px; display: block; }
 
-        /* Actions */
-        .btn-group { display: flex; gap: 10px; width: 320px; margin: 20px 0 40px; }
-        .btn { flex: 1; padding: 12px; border: none; border-radius: 10px; font-weight: 700; cursor: pointer; color: white; display: flex; align-items: center; justify-content: center; gap: 8px; }
-        .btn-save { background: var(--pink-accent); }
-        .btn-share { background: var(--dark-green); }
+        .f-info-grid { 
+            display: grid; grid-template-columns: 1fr 1fr; gap: 12px; text-align: left; 
+            background: rgba(255, 255, 255, 0.85); padding: 15px; border-radius: 18px;
+            box-shadow: inset 0 0 10px rgba(0,0,0,0.05);
+        }
+        .f-label { font-size: 7.5px; font-weight: 700; color: #777; text-transform: uppercase; }
+        .f-val { font-size: 11.5px; font-weight: 700; color: #111; display: block; }
 
+        .f-extra { margin-top: 15px; display: flex; justify-content: space-between; align-items: center; padding: 0 25px; }
+        .sign-box .sign { font-family: 'Dancing Script', cursive; font-size: 20px; color: var(--secondary-dark); }
+        .sign-box .label { font-size: 8px; color: #777; border-top: 1px solid #ddd; padding-top: 2px; text-transform: uppercase; }
+
+        /* --- BACK --- */
+        .b-header { background: var(--secondary-dark); color: white; padding: 12px; text-align: center; font-weight: 800; font-size: 14px; position: relative; z-index: 2; letter-spacing: 1px; }
+        .b-body { position: relative; z-index: 3; padding-top: 5px; }
+        
+        .b-section { margin: 8px 18px; background: rgba(255, 255, 255, 0.9); border-radius: 12px; padding: 10px; border: 1px solid #e0e0e0; }
+        .b-title { font-size: 10px; font-weight: 800; color: var(--secondary-dark); margin-bottom: 5px; display: flex; align-items: center; gap: 6px; }
+        .b-list { font-size: 9px; color: #333; padding-left: 18px; margin: 0; line-height: 1.5; }
+
+        .premium-qr-box {
+            margin: 10px 18px; background: #fff; border: 2.5px solid var(--secondary-dark); 
+            border-radius: 15px; padding: 10px; display: flex; flex-direction: column; align-items: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        #qr-box { background: white; padding: 2px; }
+        .scan-msg { font-size: 8px; font-weight: 900; color: var(--primary-bold); margin-top: 5px; letter-spacing: 1px; }
+
+        .b-extra { 
+            position: absolute; bottom: 35px; width: 100%; text-align: center; 
+            background: linear-gradient(90deg, var(--secondary-dark), #283593); color: var(--white); 
+            padding: 10px 0; font-style: italic; font-size: 11px; font-weight: 600;
+            box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
+        }
+
+        .footer-site { font-size: 7.5px; text-align: center; position: absolute; bottom: 15px; width: 100%; color: #666; font-weight: 600; }
+        .rainbow-strip { position: absolute; bottom: 0; width: 100%; height: 10px; background: linear-gradient(90deg, #1A237E, #FF357A, #FFD600, #4CAF50); }
+
+        .btn { width: 350px; padding: 15px; background: var(--secondary-dark); color: white; border: none; border-radius: 12px; font-weight: 700; cursor: pointer; margin-top: 20px; font-size: 16px; transition: 0.3s; }
+        .btn:hover { background: var(--primary-bold); transform: scale(1.02); }
     </style>
 </head>
 <body>
 
-    <div class="ui-panel">
-        <input type="file" accept="image/*" onchange="upImg(event)">
-        <input type="text" id="in-n" placeholder="पूरा नाम" oninput="sync()">
-        <input type="text" id="in-i" placeholder="पार्टनर ID" oninput="sync()">
-        <input type="text" id="in-p" placeholder="मोबाइल नंबर" oninput="sync()">
-        <input type="text" id="in-a" placeholder="पूरा पता (Back Side)" oninput="sync()">
+    <div class="panel">
+        <h3 style="margin-top:0; color:var(--secondary-dark); text-align:center;">SewaAstra ID System</h3>
+        <div class="input-grid">
+            <input type="file" accept="image/*" onchange="loadImg(event)">
+            <input type="text" id="in-n" placeholder="पार्टनर का नाम" oninput="sync()">
+            <input type="text" id="in-s" placeholder="Skill (e.g. Master Tech)" oninput="sync()">
+            <input type="text" id="in-i" placeholder="Partner ID" oninput="sync()">
+            <input type="text" id="in-p" placeholder="Mobile Number" oninput="sync()">
+            <input type="text" id="in-l" placeholder="Location" oninput="sync()">
+            <input type="text" id="in-b" placeholder="Blood Group" oninput="sync()">
+        </div>
     </div>
 
-    <div class="id-container">
-        <div class="card" id="f-card">
-            <div class="header">
-                <h2>SEWAASTRA</h2>
-                <p style="font-size:7px;letter-spacing:4px">OFFICIAL PARTNER</p>
+    <div id="card-container">
+        <div id="front-card" class="id-card">
+            <div class="premium-watermark"></div>
+            <div class="text-watermark">
+                <span>SEWAASTRA</span><span>SEWAASTRA</span><span>SEWAASTRA</span>
+                <span>SEWAASTRA</span><span>SEWAASTRA</span><span>SEWAASTRA</span>
+                <span>SEWAASTRA</span><span>SEWAASTRA</span><span>SEWAASTRA</span>
             </div>
-            <div class="pfp-wrap"><img id="p-out-img" src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png"></div>
-            <div class="body-content">
-                <div class="name" id="n-out">YOUR NAME</div>
-                <span class="badge">ORIGINAL VERIFIED</span>
-                <div class="info-grid">
-                    <div><span class="label">Partner ID</span><br><span class="val" id="i-out">SA-0000</span></div>
-                    <div><span class="label">Status</span><br><span class="val" style="color:var(--dark-green)">ACTIVE</span></div>
-                    <div style="grid-column: span 2;"><span class="label">Phone</span><br><span class="val" id="p-out-text">+91 0000000000</span></div>
+
+            <div class="f-header">
+                <div class="f-logo-inline">
+                    <img src="sewaastra-removebg-preview.png" alt="Logo">
+                </div>
+                <div class="f-brand">SewaAstra</div>
+            </div>
+            
+            <div class="f-pfp">
+                <img id="p-out" src="https://cdn-icons-png.flaticon.com/512/149/149071.png">
+            </div>
+
+            <div class="f-body">
+                <div class="f-name" id="n-out">PARTNER NAME</div>
+                <span class="f-tag">CERTIFIED FIELD PARTNER</span>
+
+                <div class="f-info-grid">
+                    <div><span class="f-label">Specialist</span><span class="f-val" id="s-out">--</span></div>
+                    <div><span class="f-label">Partner ID</span><span class="f-val" id="i-out">SA-0000</span></div>
+                    <div><span class="f-label">Location</span><span class="f-val" id="l-out">Not Set</span></div>
+                    <div><span class="f-label">Blood Group</span><span class="f-val" id="b-out">--</span></div>
+                    <div style="grid-column: span 2;"><span class="f-label">Emergency Contact</span><span class="f-val" id="p-out-text">+91 00000 00000</span></div>
+                    
+                </div>
+
+                <div class="f-extra">
+                    <div class="sign-box">
+                        <div class="sign">SewaAstra</div>
+                        <div class="label">Authorized Sign</div>
+                    </div>
+                    <div class="sign-box" style="opacity: 0.5;">
+                        <i class="fa fa-award" style="font-size: 25px; color: var(--secondary-dark);"></i>
+                        <div class="label" style="border:none">Verified</div>
+                    </div>
                 </div>
             </div>
-            <div class="seel" style="bottom: 20px; right: 15px;">
-                <i class="fa fa-award"></i>
-                <span>SEWAASTRA<br>ORIGINAL SEEL</span>
-            </div>
-            <div style="position:absolute; bottom:0; width:100%; height:8px; background:var(--pink-accent)"></div>
+            <div class="rainbow-strip"></div>
         </div>
 
-        <div class="card" id="b-card">
-            <div class="b-header">SECURITY PROTOCOLS</div>
+        <div id="back-card" class="id-card">
+            <div class="premium-watermark"></div>
+            <div class="text-watermark">
+                <span>SEWAASTRA</span><span>SEWAASTRA</span><span>SEWAASTRA</span>
+                <span>SEWAASTRA</span><span>SEWAASTRA</span><span>SEWAASTRA</span>
+            </div>
+
+            <div class="b-header">SERVICE & SAFETY CODES</div>
+            
             <div class="b-body">
-                <div style="margin-bottom: 10px;">
-                    <span class="label">Residential Address:</span><br>
-                    <span class="val" id="a-out">Not Provided</span>
+                <div class="b-section" style="border-left: 4px solid var(--secondary-dark);">
+                    <div class="b-title"><i class="fa fa-toolbox"></i> KEY SERVICES</div>
+                    <ul class="b-list">
+                        <li>Advanced Appliance Repair & Installation</li>
+                        <li>Certified Electrical & Plumbing Solutions</li>
+                        <li>Priority Emergency Home Support</li>
+                    </ul>
                 </div>
-                <p>1. यह कार्ड SewaAstra की संपत्ति है।<br>2. खो जाने पर तुरंत मुख्यालय को सूचित करें।<br>3. इस कार्ड का दुरुपयोग दंडनीय अपराध है।</p>
-                <div class="qr-wrap">
+
+                <div class="b-section" style="border-left: 4px solid #2E7D32;">
+                    <div class="b-title" style="color:#2E7D32;"><i class="fa fa-shield-check"></i> Notice</div>
+                    <ul class="b-list">
+                        <li>यह कार्ड SewaAstra की संपत्ति है।</li>
+                        <li>इस कार्ड का दुरुपयोग दंडनीय अपराध है।</li>
+                    </ul>
+                </div>
+
+                <div class="premium-qr-box">
                     <div id="qr-box"></div>
-                    <p style="font-size:8px; margin-top:5px; font-weight:700">SCAN TO VERIFY IDENTITY</p>
+                    <div class="scan-msg">AUTHENTICATE PARTNER</div>
+                </div>
+
+                <div class="b-section" style="border-left: 4px solid var(--primary-bold);">
+                    <div class="b-title" style="color:var(--primary-bold)"><i class="fa fa-user-shield"></i> SAFETY FIRST</div>
+                    <p style="font-size: 8px; margin: 0; color: #444; font-weight: 600;">उपकरणों की जांच के बिना काम शुरू न करें। ग्राहकों की सुरक्षा हमारी प्राथमिकता है।</p>
                 </div>
             </div>
-            <div class="seel" style="top: 130px; left: 15px; transform: rotate(10deg);">
-                <i class="fa fa-shield-halved"></i>
-                <span>SEWAASTRA<br>TRUSTED</span>
+            <div class="b-section">
+                <div class="b-title"><i class="fa fa-map-marker-alt"></i> OFFICE & HELPLINE</div>
+                <p style="font-size: 7.5px; margin: 0; color: #555;">
+                    <b>Address:</b> Bhopal, Madhya Pradesh,- 462026 India. <br>
+                    <b>Support:</b> Contact - 7869969190 /support.sewaastra@gmail.com
+                </p>
             </div>
-            <div style="position:absolute; bottom:0; width:100%; height:8px; background:var(--dark-green)"></div>
+            <div class="b-extra">
+                "आपका भरोसा, हमारी सेवा - SewaAstra"
+            </div>
+
+            <div class="footer-site">
+                soorshyamvishwakarma37-cyber.github.io/SewaAstra/
+            </div>
+            <div class="rainbow-strip"></div>
         </div>
     </div>
 
-    <div class="btn-group">
-        <button class="btn btn-save" onclick="save()"><i class="fa fa-download"></i> Save Set</button>
-        <button class="btn btn-share" onclick="share()"><i class="fa fa-share-alt"></i> Share</button>
-    </div>
+    <button class="btn" onclick="save()">Download Ultra Premium ID</button>
 
     <script>
-        var qrcode = new QRCode(document.getElementById("qr-box"), { text: "Verified-SewaAstra", width: 70, height: 70, colorDark : "#1a237e" });
+        var qrcode = new QRCode(document.getElementById("qr-box"), {
+            text: "https://soorshyamvishwakarma37-cyber.github.io/SewaAstra/",
+            width: 85, height: 85, colorDark : "#1A237E"
+        });
 
         function sync() {
-            document.getElementById('n-out').innerText = document.getElementById('in-n').value || "YOUR NAME";
-            document.getElementById('i-out').innerText = document.getElementById('in-i').value || "SA-0000";
-            document.getElementById('p-out-text').innerText = "+91 " + (document.getElementById('in-p').value || "0000000000");
-            document.getElementById('a-out').innerText = document.getElementById('in-a').value || "Not Provided";
-            qrcode.makeCode("SA-" + document.getElementById('in-i').value);
+            const name = document.getElementById('in-n').value || "PARTNER NAME";
+            const skill = document.getElementById('in-s').value || "--";
+            const id = document.getElementById('in-i').value || "SA-0000";
+            const phone = document.getElementById('in-p').value || "00000 00000";
+            const loc = document.getElementById('in-l').value || "Not Set";
+            const blood = document.getElementById('in-b').value || "--";
+
+            document.getElementById('n-out').innerText = name;
+            document.getElementById('s-out').innerText = skill;
+            document.getElementById('i-out').innerText = id;
+            document.getElementById('l-out').innerText = loc;
+            document.getElementById('b-out').innerText = blood;
+            document.getElementById('p-out-text').innerText = "+91 " + phone;
+
+            const qrData = `SEWAASTRA VERIFIED PARTNER\nName: ${name}\nID: ${id}\nSkill: ${skill}\nStatus: Active`;
+            qrcode.clear();
+            qrcode.makeCode(qrData);
         }
 
-        function upImg(e) {
+        function loadImg(e) {
             const reader = new FileReader();
-            reader.onload = function() { document.getElementById('p-out-img').src = reader.result; }
+            reader.onload = function() { document.getElementById('p-out').src = reader.result; }
             reader.readAsDataURL(e.target.files[0]);
         }
 
-        async function save() {
-            const ids = ['f-card', 'b-card'];
-            for(let id of ids) {
-                const canvas = await html2canvas(document.getElementById(id), { scale: 3 });
+        function save() {
+            html2canvas(document.getElementById("card-container"), { scale: 3, useCORS: true }).then(canvas => {
                 const link = document.createElement("a");
-                link.download = `SewaAstra_${id}.png`;
+                link.download = `SewaAstra_Ultra_Premium.png`;
                 link.href = canvas.toDataURL();
                 link.click();
-            }
-        }
-
-        async function share() {
-            const canvas = await html2canvas(document.getElementById("f-card"), { scale: 2 });
-            canvas.toBlob(async (blob) => {
-                const file = new File([blob], 'SewaAstra_Front.png', { type: 'image/png' });
-                if (navigator.share) { await navigator.share({ files: [file], title: 'My Official ID' }); }
-                else { alert("Browser not supported"); }
             });
         }
     </script>
