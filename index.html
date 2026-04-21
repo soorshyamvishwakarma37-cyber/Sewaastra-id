@@ -288,7 +288,7 @@
     <script>
         let cropper;
         const qrcode = new QRCode(document.getElementById("qr-box"), {
-            text: "https://soorshyamvishwakarma37-cyber.github.io/SewaAstra/verify?id=SA-0000",
+            text: "https://soorshyamvishwakarma37-cyber.github.io/SewaAstra/",
             width: 85, height: 85, colorDark : "#1A237E"
         });
 
@@ -305,7 +305,7 @@
 
             // Update QR Code dynamically with Partner ID
             qrcode.clear();
-            qrcode.makeCode(`https://soorshyamvishwakarma37-cyber.github.io/SewaAstra/`);
+            qrcode.makeCode(`https://soorshyamvishwakarma37-cyber.github.io/SewaAstra/verify?name=${partnerName}&id=${partnerID}`);
         }
 
         // CROP FUNCTIONS
