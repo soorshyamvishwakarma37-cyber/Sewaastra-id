@@ -1,4 +1,4 @@
- <!DOCTYPE html>
+  <!DOCTYPE html>
 <html lang="hi">
 <head>
     <meta charset="UTF-8">
@@ -14,7 +14,7 @@
         :root {
             --primary-bold: #FF357A;
             --secondary-dark: #1A237E;
-            --card-green-bg: #F0F7F1; /* Slightly softer green */
+            --card-green-bg: #F0F7F1;
             --card-border: #A5D6A7;
             --white: #FFFFFF;
             --gold: #D4AF37;
@@ -23,27 +23,22 @@
         * { box-sizing: border-box; }
         body { background: #e0e5ec; font-family: 'Poppins', sans-serif; display: flex; flex-direction: column; align-items: center; padding: 20px; margin: 0; }
 
-        /* Panel */
         .panel { background: var(--white); padding: 20px; border-radius: 15px; width: 100%; max-width: 420px; margin-bottom: 25px; box-shadow: 10px 10px 20px #bebebe; }
         .input-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
         .panel input { width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 8px; font-size: 13px; }
         .panel input[type="file"] { grid-column: span 2; }
 
-        /* Card Setup */
         #card-container { display: flex; flex-direction: column; gap: 30px; }
         .id-card {
             width: 350px; height: 580px; border-radius: 25px; position: relative; overflow: hidden;
             background: var(--card-green-bg); border: 2.5px solid var(--card-border);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2); margin-bottom: 10px;
         }
 
-        /* --- ULTRA PREMIUM WATERMARK LAYER --- */
         .premium-watermark {
             position: absolute; width: 200%; height: 200%; top: -50%; left: -50%;
             background-image: linear-gradient(30deg, transparent 45%, rgba(26, 35, 126, 0.03) 50%, transparent 55%);
-            background-size: 30px 30px;
-            transform: rotate(15deg);
-            pointer-events: none; z-index: 1;
+            background-size: 30px 30px; transform: rotate(15deg); pointer-events: none; z-index: 1;
         }
 
         .text-watermark {
@@ -54,7 +49,6 @@
             letter-spacing: 5px;
         }
 
-        /* --- FRONT --- */
         .f-header {
             background: var(--secondary-dark); height: 140px; display: flex; align-items: center; 
             justify-content: center; gap: 12px; clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
@@ -62,7 +56,9 @@
         }
         .f-logo-inline { width: 50px; height: 50px; background: white; border-radius: 10px; padding: 4px; border: 2px solid var(--gold); }
         .f-logo-inline img { width: 100%; height: 100%; object-fit: contain; }
-        .f-brand { font-family: 'Montserrat'; font-weight: 900; font-size: 32px; color: var(--white); }
+        
+        /* PREMIUM FONT FOR BRAND */
+        .f-brand { font-family: 'Montserrat', sans-serif; font-weight: 900; font-size: 32px; color: var(--white); text-transform: uppercase; letter-spacing: -1px; }
 
         .f-pfp {
             width: 135px; height: 135px; border-radius: 50%; border: 6px solid var(--white);
@@ -87,7 +83,6 @@
         .sign-box .sign { font-family: 'Dancing Script', cursive; font-size: 20px; color: var(--secondary-dark); }
         .sign-box .label { font-size: 8px; color: #777; border-top: 1px solid #ddd; padding-top: 2px; text-transform: uppercase; }
 
-        /* --- BACK --- */
         .b-header { background: var(--secondary-dark); color: white; padding: 12px; text-align: center; font-weight: 800; font-size: 14px; position: relative; z-index: 2; letter-spacing: 1px; }
         .b-body { position: relative; z-index: 3; padding-top: 5px; }
         
@@ -107,14 +102,15 @@
             position: absolute; bottom: 35px; width: 100%; text-align: center; 
             background: linear-gradient(90deg, var(--secondary-dark), #283593); color: var(--white); 
             padding: 10px 0; font-style: italic; font-size: 11px; font-weight: 600;
-            box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
         }
 
         .footer-site { font-size: 7.5px; text-align: center; position: absolute; bottom: 15px; width: 100%; color: #666; font-weight: 600; }
         .rainbow-strip { position: absolute; bottom: 0; width: 100%; height: 10px; background: linear-gradient(90deg, #1A237E, #FF357A, #FFD600, #4CAF50); }
 
-        .btn { width: 350px; padding: 15px; background: var(--secondary-dark); color: white; border: none; border-radius: 12px; font-weight: 700; cursor: pointer; margin-top: 20px; font-size: 16px; transition: 0.3s; }
+        .btn-group { display: flex; gap: 10px; flex-direction: column; width: 350px; }
+        .btn { width: 100%; padding: 15px; background: var(--secondary-dark); color: white; border: none; border-radius: 12px; font-weight: 700; cursor: pointer; margin-top: 10px; font-size: 16px; transition: 0.3s; }
         .btn:hover { background: var(--primary-bold); transform: scale(1.02); }
+        .btn-download { background: #2E7D32; }
     </style>
 </head>
 <body>
@@ -136,7 +132,6 @@
         <div id="front-card" class="id-card">
             <div class="premium-watermark"></div>
             <div class="text-watermark">
-                <span>SEWAASTRA</span><span>SEWAASTRA</span><span>SEWAASTRA</span>
                 <span>SEWAASTRA</span><span>SEWAASTRA</span><span>SEWAASTRA</span>
                 <span>SEWAASTRA</span><span>SEWAASTRA</span><span>SEWAASTRA</span>
             </div>
@@ -162,7 +157,6 @@
                     <div><span class="f-label">Location</span><span class="f-val" id="l-out">Not Set</span></div>
                     <div><span class="f-label">Blood Group</span><span class="f-val" id="b-out">--</span></div>
                     <div style="grid-column: span 2;"><span class="f-label">Emergency Contact</span><span class="f-val" id="p-out-text">+91 00000 00000</span></div>
-                    
                 </div>
 
                 <div class="f-extra">
@@ -182,7 +176,6 @@
         <div id="back-card" class="id-card">
             <div class="premium-watermark"></div>
             <div class="text-watermark">
-                <span>SEWAASTRA</span><span>SEWAASTRA</span><span>SEWAASTRA</span>
                 <span>SEWAASTRA</span><span>SEWAASTRA</span><span>SEWAASTRA</span>
             </div>
 
@@ -223,20 +216,19 @@
                     <b>Support:</b> Contact - 7869969190 /support.sewaastra@gmail.com
                 </p>
             </div>
-            <div class="b-extra">
-                "आपका भरोसा, हमारी सेवा - SewaAstra"
-            </div>
-
-            <div class="footer-site">
-                soorshyamvishwakarma37-cyber.github.io/SewaAstra/
-            </div>
+            <div class="b-extra">"आपका भरोसा, हमारी सेवा - SewaAstra"</div>
+            <div class="footer-site">soorshyamvishwakarma37-cyber.github.io/SewaAstra/</div>
             <div class="rainbow-strip"></div>
         </div>
     </div>
 
-    <button class="btn" onclick="save()">Download Ultra Premium ID</button>
+    <div class="btn-group">
+        <button class="btn btn-download" onclick="saveSide('front-card', 'SewaAstra_Front')">Download Front Side</button>
+        <button class="btn btn-download" onclick="saveSide('back-card', 'SewaAstra_Back')">Download Back Side</button>
+    </div>
 
     <script>
+        // FIXED QR LINK
         var qrcode = new QRCode(document.getElementById("qr-box"), {
             text: "https://soorshyamvishwakarma37-cyber.github.io/SewaAstra/",
             width: 85, height: 85, colorDark : "#1A237E"
@@ -256,10 +248,10 @@
             document.getElementById('l-out').innerText = loc;
             document.getElementById('b-out').innerText = blood;
             document.getElementById('p-out-text').innerText = "+91 " + phone;
-
-            const qrData = `SEWAASTRA VERIFIED PARTNER\nName: ${name}\nID: ${id}\nSkill: ${skill}\nStatus: Active`;
+            
+            // Link remains same as requested
             qrcode.clear();
-            qrcode.makeCode(qrData);
+            qrcode.makeCode("https://soorshyamvishwakarma37-cyber.github.io/SewaAstra/");
         }
 
         function loadImg(e) {
@@ -268,10 +260,11 @@
             reader.readAsDataURL(e.target.files[0]);
         }
 
-        function save() {
-            html2canvas(document.getElementById("card-container"), { scale: 3, useCORS: true }).then(canvas => {
+        // SEPARATE SIDE DOWNLOADS
+        function saveSide(elementId, fileName) {
+            html2canvas(document.getElementById(elementId), { scale: 3, useCORS: true }).then(canvas => {
                 const link = document.createElement("a");
-                link.download = `SewaAstra_Ultra_Premium.png`;
+                link.download = `${fileName}.png`;
                 link.href = canvas.toDataURL();
                 link.click();
             });
