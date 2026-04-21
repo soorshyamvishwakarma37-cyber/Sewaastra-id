@@ -1,4 +1,4 @@
- <!DOCTYPE html>
+  <!DOCTYPE html>
 <html lang="hi">
 <head>
     <meta charset="UTF-8">
@@ -10,6 +10,8 @@
     <script src="https://cdn.jsdelivr.net/npm/jsbarcode@3.11.5/dist/JsBarcode.all.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.13/cropper.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.13/cropper.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&family=Dancing+Script&display=swap" rel="stylesheet">
 
@@ -48,19 +50,20 @@
         .f-header {
             height: 190px; background: var(--brand-green);
             clip-path: ellipse(115% 70% at 50% 30%);
-            display: flex; flex-direction: column; align-items: center; padding-top: 20px; color: white;
+            display: flex; flex-direction: column; align-items: center; padding-top: 25px; color: white;
             position: relative; z-index: 2;
         }
 
-        /* लोगो और नाम को एक साथ सेट करने के लिए */
         .brand-container {
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 10px;
         }
+        
+        /* लोगो का साइज बढ़ा दिया गया है */
         .f-logo-small {
-            width: 35px;
-            height: 35px;
+            width: 50px; 
+            height: 50px;
             object-fit: contain;
         }
 
@@ -141,7 +144,7 @@
             <div class="card-watermark">SEWAASTRA</div>
             <div class="f-header">
                 <div class="brand-container">
-                    <img src="sewaastra-removebg-preview.png " class="f-logo-small" alt="Logo">
+                    <img src="sewaastra-removebg-preview.png" class="f-logo-small" alt="Logo">
                     <div style="font-size: 26px; font-weight: 800;">SewaAstra</div>
                 </div>
                 <div class="verified-badge"><i class="fas fa-check-circle"></i> VERIFIED ID</div>
@@ -187,7 +190,7 @@
                     <ul class="b-list">
                         <li>यह कार्ड SewaAstra की संपत्ति है।</li>
                         <li> कार्ड का दुरुपयोग या फर्जीवाड़ा कानूनी रूप से दंडनीय है। </li>
-                    <li>SewaAstra किसी भी अनधिकृत लेनदेन (Unauthorized Transaction) के लिए जिम्मेदार नहीं है।</li>
+                        <li>SewaAstra किसी भी अनधिकृत लेनदेन के लिए जिम्मेदार नहीं है।</li>
                     </ul>
                 </div>
                 <div class="qr-container">
@@ -196,12 +199,10 @@
                 </div>
                 <div class="b-box" style="border-left: 5px solid #EC407A;">
                     <div class="b-title" style="color: #EC407A;"><i class="fas fa-user-shield"></i> SAFETY FIRST POLICY</div>
-                    <p style="font-size: 8.5px; margin: 2px 0; font-weight: 600; line-height: 1.2;">1.उपकरणो  की जांच के बिना काम शुरू न करें। ग्राहकों की सुरक्षा प्राथमिकता
- है  । </p>
-  <p style="font-size: 8.5px; margin: 2px 0; font-weight: 600; line-height: 1.2;"> 2. ग्राहक के परिसर में धूम्रपान, नशा या अभद्र भाषा का प्रयोग पूरी तरह वर्जित है। </p>
-    <p style="font-size: 8.5px; margin: 2px 0; font-weight: 600; line-height: 1.2;">  3. ग्राहक की व्यक्तिगत जानकारी और गोपनीयता का सम्मान करना अनिवार्य है।  </p>
-     <p style="font-size: 8.5px; margin: 2px 0; font-weight: 600; line-height: 1.2;"> 4. किसी भी प्रकार की अनैतिक गतिविधि पाए जाने पर तुरंत कानूनी कार्यवाही की जाएगी। </p>
-    
+                    <p style="font-size: 8.5px; margin: 2px 0; font-weight: 600; line-height: 1.2;">1.उपकरणों की जांच के बिना काम शुरू न करें। ग्राहकों की सुरक्षा प्राथमिकता है। </p>
+                    <p style="font-size: 8.5px; margin: 2px 0; font-weight: 600; line-height: 1.2;"> 2. ग्राहक के परिसर में धूम्रपान, नशा या अभद्र भाषा का प्रयोग पूरी तरह वर्जित है। </p>
+                    <p style="font-size: 8.5px; margin: 2px 0; font-weight: 600; line-height: 1.2;">  3. ग्राहक की व्यक्तिगत जानकारी और गोपनीयता का सम्मान करना अनिवार्य है।  </p>
+                    <p style="font-size: 8.5px; margin: 2px 0; font-weight: 600; line-height: 1.2;"> 4. किसी भी प्रकार की अनैतिक गतिविधि पाए जाने पर तुरंत कानूनी कार्यवाही की जाएगी। </p>
                     <div style="margin-top: 5px; border-top: 1px solid #eee; padding-top: 5px;">
                         <div style="color: var(--brand-blue); font-weight: 800; font-size: 10px;">OFFICE & HELPLINE</div>
                         <div style="font-size: 8.5px; color: #555; line-height: 1.3;">
@@ -219,8 +220,8 @@
     </div>
 
     <div style="margin-top: 20px;">
-        <button class="btn" onclick="download('front-card')">Download Front</button>
-        <button class="btn" onclick="download('back-card')" style="background:#37474F;">Download Back</button>
+        <button class="btn" onclick="downloadPDF('front-card', 'SewaAstra_Front')">Download Front PDF</button>
+        <button class="btn" onclick="downloadPDF('back-card', 'SewaAstra_Back')" style="background:#37474F;">Download Back PDF</button>
     </div>
 
     <script>
@@ -277,12 +278,30 @@
             document.getElementById('crop-modal').style.display = 'none';
         }
 
-        async function download(id) {
-            const canvas = await html2canvas(document.getElementById(id), { scale: 3, useCORS: true });
-            const link = document.createElement('a');
-            link.download = `SewaAstra_${id}.png`;
-            link.href = canvas.toDataURL();
-            link.click();
+        // PDF डाउनलोड फंक्शन - बिल्कुल कार्ड जैसा लुक मिलेगा
+        async function downloadPDF(elementId, fileName) {
+            const { jsPDF } = window.jspdf;
+            const element = document.getElementById(elementId);
+            
+            // स्क्रीनशॉट की तरह एलिमेंट को कैप्चर करना
+            const canvas = await html2canvas(element, { 
+                scale: 3, 
+                useCORS: true,
+                logging: false,
+                backgroundColor: null 
+            });
+            
+            const imgData = canvas.toDataURL("image/png");
+            
+            // PDF साइज को कार्ड के रेशियो (350x570) के अनुसार सेट करना
+            const pdf = new jsPDF({
+                orientation: 'portrait',
+                unit: 'px',
+                format: [350, 570]
+            });
+
+            pdf.addImage(imgData, 'PNG', 0, 0, 350, 570);
+            pdf.save(`${fileName}.pdf`);
         }
     </script>
 </body>
